@@ -1,34 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-nodejs-app-deployment
-  namespace: default
+  name: my-deployment  # Name of the deployment
 spec:
-  replicas: 2
+  replicas: 3  # Number of replicas (pods)
   selector:
     matchLabels:
-      app: my-nodejs-app
+      app: my-app  # Label selector to match pods
   template:
     metadata:
       labels:
-        app: my-nodejs-app
+        app: my-app  # Label for the pod
     spec:
       containers:
-      - name: my-nodejs-app
-        image: "appi12/jeeva:${BUILD_NUMBER}"  # The image will be replaced at runtime
+      - name: my-container  # Container name
+        image: appi12/jeeva:latest  # Docker image from Docker Hub
         ports:
-        - containerPort: 8080
+        - containerPort: 8080  # Port on which the container will listen
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-nodejs-app-service
-  namespace: default
+  name: my-service  # Name of the service
 spec:
   selector:
-    app: my-nodejs-app
+    app: my-app  # Label selector to match the pod
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 8080
-  type: LoadBalancer
+      port: 80  # Port exposed by the service
+      targetPort: 8080  # Port to access the container's port
+  type: LoadBalancer  # Type of the service (LoadBalancer for external access)
