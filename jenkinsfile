@@ -56,7 +56,7 @@ pipeline {
                     // Apply deployment.yaml to Kubernetes
                     sh '''
                     echo "Applying deployment..."
-                    kubectl apply -f deployment.yaml
+                    kubectl apply -f deployment.yml
                     '''
                 }
             }
