@@ -49,10 +49,10 @@ pipeline {
                 echo 'Deploying to Kubernetes...'
                 script {
                     // Deploy the image to Kubernetes using the correct image tag
-                    sh '''
+                    sh """
                     kubectl set image deployment/${KUBERNETES_DEPLOYMENT} \
                     -n ${KUBERNETES_NAMESPACE} app=${DOCKER_IMAGE}
-                    '''
+                    """
                 }
             }
         }
