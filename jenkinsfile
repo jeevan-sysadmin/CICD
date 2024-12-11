@@ -15,7 +15,7 @@ pipeline {
                 checkout([$class: 'GitSCM',
                     branches: [[name: '*/main']], // Replace 'main' with your branch name
                     userRemoteConfigs: [[
-                        url: 'https://github.com/your-github-username/your-repo-name.git', // Replace with your repo URL
+                        url: 'https://github.com/jeevan-sysadmin/CICD.git', // Replace with your repo URL
                         credentialsId: 'github-credentials-id' // Replace with your Jenkins GitHub credentials ID
                     ]]
                 ])
