@@ -44,15 +44,16 @@ pipeline {
             }
         }
 
-       stage('Deploy to Kubernetes') {
-    steps {
-        echo 'Deploying to Kubernetes...'
-        script {
-            sh 'kubectl apply -f deployment.yml'
+        stage('Deploy to Kubernetes') {
+            steps {
+                echo 'Deploying to Kubernetes...'
+                script {
+                    // Apply the Kubernetes deployment configuration from the deployment.yml file
+                    sh 'kubectl apply -f deployment.yml'
+                }
+            }
         }
     }
-}
-
 
     post {
         success {
