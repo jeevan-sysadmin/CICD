@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_HUB_USERNAME = "appi12" // Your Docker Hub username
         DOCKER_HUB_REPO = "jeeva" // Repository name
-        DOCKER_HUB_API_TOKEN_ID = "docker-hub-api-token" // Jenkins credential ID for Docker Hub API token
+        DOCKER_HUB_API_TOKEN_ID = "dckr_pat_6F-ZBB6fg-opjRBE0pvutevanss" // Jenkins credential ID for Docker Hub API token
         DOCKER_IMAGE = "${DOCKER_HUB_USERNAME}/${DOCKER_HUB_REPO}:${env.BUILD_NUMBER}"
         KUBERNETES_DEPLOYMENT = "my-nodejs-app-deployment"
         KUBERNETES_NAMESPACE = "default"
