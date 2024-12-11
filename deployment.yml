@@ -1,32 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-deployment  # Name of the deployment
+  name: my-nodejs-app-deployment
+  namespace: default
 spec:
-  replicas: 3  # Number of replicas (pods)
+  replicas: 2
   selector:
     matchLabels:
-      app: my-app  # Label selector to match pods
+      app: my-nodejs-app
   template:
     metadata:
       labels:
-        app: my-app  # Label for the pod
+        app: my-nodejs-app
     spec:
       containers:
-      - name: my-container  # Container name
-        image: appi12/jeeva:latest  # Docker image from Docker Hub
-        ports:
-        - containerPort: 8080  # Port on which the container will listen
+        - name: my-nodejs-app
+          # The image name will be dynamically set with the build number in Jenkins
+          image: "appi12/jeeva:${BUILD_NUMBER}"  # Replace with the image from Docker Hub, Jenkins will inject the BUILD_NUMBER variable
+          ports:
+            - containerPort: 3000  # Replace with the port your app listens on
+          env:
+            - name: NODE_ENV
+              value: "production"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-service  # Name of the service
+  name: my-nodejs-app-service
+  namespace: default
 spec:
   selector:
-    app: my-app  # Label selector to match the pod
+    app: my-nodejs-app
   ports:
     - protocol: TCP
-      port: 80  # Port exposed by the service
-      targetPort: 8080  # Port to access the container's port
-  type: LoadBalancer  # Type of the service (LoadBalancer for external access)
+      port: 80
+      targetPort: 3000  # Replace with the port your app listens on
+  type: LoadBalancer  # You can change this based on your needs (e.g., ClusterIP)
