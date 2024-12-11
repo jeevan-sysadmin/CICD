@@ -16,7 +16,7 @@ pipeline {
                     branches: [[name: '*/main']], // Replace 'main' with your branch name
                     userRemoteConfigs: [[
                         url: 'https://github.com/jeevan-sysadmin/CICD.git', // Replace with your repo URL
-                        credentialsId: 'github-credentials-id'  // Correct Jenkins credentials ID
+                        credentialsId: 'b38f3c3c-bbdf-4543-86f7-9197ac9117e1'  // Correct Jenkins credentials ID
                     ]]
                 ])
             }
