@@ -15,9 +15,10 @@ spec:
     spec:
       containers:
       - name: my-nodejs-app
-        image: appi12/jeeva:${IMAGE_TAG} # Use IMAGE_TAG from Jenkins pipeline
+        image: appi12/jeeva:30 # Updated with specific Docker Hub image tag
         ports:
         - containerPort: 3000
+
 ---
 apiVersion: v1
 kind: Service
