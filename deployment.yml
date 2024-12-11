@@ -1,38 +1,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-nodejs-app-deployment
+  name: my-react-app-deployment
   namespace: default
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: my-nodejs-app
+      app: my-react-app
   template:
     metadata:
       labels:
-        app: my-nodejs-app
+        app: my-react-app
     spec:
       containers:
-        - name: my-nodejs-app
-          # The image name will be dynamically set with the build number in Jenkins
-          image: "appi12/jeeva:50"  # Replace with the image from Docker Hub, Jenkins will inject the BUILD_NUMBER variable
-          ports:
-            - containerPort: 3000  # Replace with the port your app listens on
-          env:
-            - name: NODE_ENV
-              value: "production"
+      - name: my-react-app
+        image: appi12/jeeva:50 # Ensure this React.js image exists in Docker Hub
+        ports:
+        - containerPort: 3000
+      imagePullSecrets: # Add this if the image is private
+      - name: my-dockerhub-secret
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-nodejs-app-service
+  name: my-react-app-service
   namespace: default
 spec:
-  selector:
-    app: my-nodejs-app
+  type: LoadBalancer
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 3000  # Replace with the port your app listens on
-  type: LoadBalancer  # You can change this based on your needs (e.g., ClusterIP)
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  selector:
+    app: my-react-app
