@@ -56,7 +56,7 @@ pipeline {
                     // Apply both deployment.yaml and service.yaml to Kubernetes
                     sh '''
                     echo "Applying deployment..."
-                    kubectl apply -f /deployment.yaml
+                    kubectl apply -f /deployment.yml
                     echo "Applying service..."
                     kubectl apply -f service.yaml
                     '''
