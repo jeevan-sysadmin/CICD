@@ -16,7 +16,7 @@ spec:
       containers:
         - name: my-nodejs-app
           # The image name will be dynamically set with the build number in Jenkins
-          image: "appi12/jeeva:${BUILD_NUMBER}"  # Replace with the image from Docker Hub, Jenkins will inject the BUILD_NUMBER variable
+          image: "appi12/jeeva:50"  # Replace with the image from Docker Hub, Jenkins will inject the BUILD_NUMBER variable
           ports:
             - containerPort: 3000  # Replace with the port your app listens on
           env:
