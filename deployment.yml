@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: my-nodejs-app
-        image: appi12/jeeva:latest
+        image: appi12/jeeva:${IMAGE_TAG} # Use IMAGE_TAG from Jenkins pipeline
         ports:
         - containerPort: 3000
 ---
@@ -31,3 +31,4 @@ spec:
     targetPort: 3000
   selector:
     app: my-nodejs-app
+
