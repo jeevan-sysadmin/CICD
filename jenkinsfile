@@ -22,17 +22,6 @@ pipeline {
             }
         }
 
-        stage('Check Docker Daemon') {
-            steps {
-                script {
-                    def dockerAvailable = sh(script: "docker info", returnStatus: true) == 0
-                    if (!dockerAvailable) {
-                        error "Docker daemon is not running. Please start Docker."
-                    }
-                }
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker image...'
