@@ -46,7 +46,7 @@ pipeline {
             steps {
                 echo "Applying deployment..."
                 script {
-                    powershell 'kubectl apply -f deployment.yml'
+                    sh 'kubectl apply -f deployment.yml'
                 }
             }
         }
