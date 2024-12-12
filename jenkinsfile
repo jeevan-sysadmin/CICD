@@ -48,7 +48,7 @@ pipeline {
                 echo "Applying deployment..."
                 script {
                     // Ensure kubectl is authenticated and has access to the Kubernetes cluster
-                    withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                    withCredentials([file(credentialsId: 'minikubekey', variable: 'minikubekey')]) {
                         sh 'kubectl apply -f deployment.yml --kubeconfig $KUBECONFIG'
                     }
                 }
