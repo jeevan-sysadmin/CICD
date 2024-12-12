@@ -42,17 +42,11 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
+        stage('Deploy') {
             steps {
-                echo 'Deploying to Kubernetes...'
+                echo "Applying deployment..."
                 script {
-                    // Ensure kubectl is installed and configured
-                    withKubeConfig([credentialsId: 'minikubekey']) {
-                        sh '''
-                        echo "Applying deployment..."
-                        kubectl apply -f deployment.yml
-                        '''
-                    }
+                    sh 'kubectl apply -f deployment.yml'
                 }
             }
         }
