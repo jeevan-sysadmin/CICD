@@ -6,6 +6,7 @@ pipeline {
         DOCKER_IMAGE = "${DOCKER_HUB_REPO}:${env.BUILD_NUMBER}"
         KUBERNETES_DEPLOYMENT = "my-nodejs-app-deployment"
         KUBERNETES_NAMESPACE = "default"
+        KUBECONFIG = "/home/jenkins/.kube/config"  // Path to your kubeconfig file for Kubernetes authentication
     }
 
     stages {
@@ -42,11 +43,14 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy to Kubernetes') {
             steps {
                 echo "Applying deployment..."
                 script {
-                    sh 'kubectl apply -f deployment.yml'
+                    // Ensure kubectl is authenticated and has access to the Kubernetes cluster
+                    withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                        sh 'kubectl apply -f deployment.yml --kubeconfig $KUBECONFIG'
+                    }
                 }
             }
         }
