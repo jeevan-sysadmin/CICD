@@ -15,11 +15,11 @@ spec:
     spec:
       containers:
       - name: my-react-app
-        image: appi12/jeeva:50 # Ensure this React.js image exists in Docker Hub
+        image: appi12/jeeva:50  # This is your React app Docker image with the specified tag
         ports:
         - containerPort: 3000
-      imagePullSecrets: # Add this if the image is private
-      - name: my-dockerhub-secret
+      imagePullSecrets:
+      - name: my-dockerhub-secret  # Use this if the image is private
 ---
 apiVersion: v1
 kind: Service
@@ -27,10 +27,10 @@ metadata:
   name: my-react-app-service
   namespace: default
 spec:
-  type: LoadBalancer
+  type: LoadBalancer  # Set this to LoadBalancer for cloud environments or NodePort for local
   ports:
   - protocol: TCP
-    port: 80
-    targetPort: 3000
+    port: 80       # External port exposed to the outside world
+    targetPort: 3000  # Port where the app is running inside the container
   selector:
     app: my-react-app
